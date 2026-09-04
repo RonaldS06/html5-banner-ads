@@ -1,0 +1,242 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  user-select: none;
+}
+
+.banner {
+  position: relative;
+  width: 300px;
+  height: 250px;
+  background-color: #0a0a0c;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.road-parallax-wrap {
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  z-index: 1;
+  will-change: transform;
+}
+
+.road-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 45% 75%;
+  display: block;
+  transform: scale(1.08);
+  will-change: transform;
+}
+
+.road-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 5, 8, 0.92) 0%,
+    rgba(5, 5, 8, 0.6) 28%,
+    rgba(5, 5, 8, 0.15) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.audi-watermark-rings {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.12;
+  will-change: transform, opacity;
+}
+
+.ad-header {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 10;
+}
+
+.brand-logo {
+  display: block;
+  line-height: 0;
+}
+
+.copy-wrap {
+  position: absolute;
+  top: 42px;
+  left: 16px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.headline-mask, .sub-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.headline-text {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1.1;
+  will-change: transform;
+}
+
+.subheadline-text {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #b0b0b8;
+  text-transform: uppercase;
+  will-change: transform, opacity;
+}
+
+.car-stage {
+  position: absolute;
+  bottom: 28px;
+  left: -3px;
+  width: 321px;
+  height: 173px;
+  z-index: 5;
+  will-change: transform;
+}
+
+.car-item {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.car-item.active {
+  opacity: 1;
+}
+
+.car-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.8));
+}
+
+.color-swatches {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.swatch-btn {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.swatch-btn.swatch-black {
+  background-color: #1a1a1e;
+}
+
+.swatch-btn.swatch-white {
+  background-color: #e5e5ec;
+}
+
+.swatch-btn.active, .swatch-btn:hover {
+  transform: scale(1.25);
+  border-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.cta-wrapper {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  z-index: 20;
+  will-change: transform, opacity;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 7px 12px;
+  border-radius: 2px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.cta-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cta-arrow {
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.banner:hover .cta-btn {
+  background-color: #bb0a30;
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(187, 10, 48, 0.6);
+}
+
+.banner:hover .cta-arrow {
+  transform: translateX(3px);
+}
+
+.ad-border {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  z-index: 99;
+}
