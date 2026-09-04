@@ -1,12 +1,36 @@
 const clickTag = "https://www.behance.net/ronaldspizarro";
 
+function switchCarColor(color) {
+  const swatches = document.querySelectorAll(".swatch-btn");
+  const carBlack = document.querySelector(".car-black");
+  const carWhite = document.querySelector(".car-white");
+
+  swatches.forEach(s => {
+    if (s.getAttribute("data-color") === color) {
+      s.classList.add("active");
+    } else {
+      s.classList.remove("active");
+    }
+  });
+
+  if (color === "white") {
+    if (carBlack) carBlack.classList.remove("active");
+    if (carWhite) carWhite.classList.add("active");
+  } else {
+    if (carWhite) carWhite.classList.remove("active");
+    if (carBlack) carBlack.classList.add("active");
+  }
+}
+
 function initClickTag() {
   const banner = document.getElementById("ad-banner");
   if (!banner) return;
   
   banner.addEventListener("click", (e) => {
-    if (e.target.closest(".swatch-btn")) return;
     e.preventDefault();
+    if (e.target.closest(".swatch-btn") || e.target.closest(".color-swatches")) {
+      return;
+    }
     const targetUrl = window.clickTag || clickTag;
     window.open(targetUrl, "_blank");
   });
@@ -14,23 +38,13 @@ function initClickTag() {
 
 function initColorSwitcher() {
   const swatches = document.querySelectorAll(".swatch-btn");
-  const carBlack = document.querySelector(".car-black");
-  const carWhite = document.querySelector(".car-white");
 
   swatches.forEach(btn => {
     btn.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      swatches.forEach(s => s.classList.remove("active"));
-      btn.classList.add("active");
-
       const color = btn.getAttribute("data-color");
-      if (color === "white") {
-        carBlack.classList.remove("active");
-        carWhite.classList.add("active");
-      } else {
-        carWhite.classList.remove("active");
-        carBlack.classList.add("active");
-      }
+      switchCarColor(color);
     });
   });
 }
@@ -54,17 +68,7 @@ function initAnimation() {
   gsap.set(".cta-wrapper", { opacity: 0, y: 8 });
 
   const tl = gsap.timeline({
-    defaults: { ease: "power3.out" },
-    onComplete: () => {
-      gsap.delayedCall(1.8, () => {
-        const whiteBtn = document.querySelector(".swatch-white");
-        if (whiteBtn) whiteBtn.click();
-        gsap.delayedCall(2.2, () => {
-          const blackBtn = document.querySelector(".swatch-black");
-          if (blackBtn) blackBtn.click();
-        });
-      });
-    }
+    defaults: { ease: "power3.out" }
   });
 
   window.bannerTimeline = tl;

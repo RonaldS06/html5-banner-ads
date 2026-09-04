@@ -76,13 +76,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, 150);
 
-    if (frame728) {
+    if (frame728 && frame728.getAttribute("src") !== p.banners.b728) {
       frame728.src = p.banners.b728;
     }
-    if (frame600) {
+    if (frame600 && frame600.getAttribute("src") !== p.banners.b600) {
       frame600.src = p.banners.b600;
     }
-    if (frame250) {
+    if (frame250 && frame250.getAttribute("src") !== p.banners.b250) {
       frame250.src = p.banners.b250;
     }
 
